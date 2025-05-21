@@ -7,7 +7,13 @@
     position: sticky;
     top: 0;
     z-index: 999;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.12);
+    transition: all 0.3s ease;
+}
+
+.scrolled {
+    box-shadow: 0 6px 16px rgba(139, 92, 246, 0.18);
+    height: 64px;
 }
 
 .navbarContainer {
@@ -21,12 +27,17 @@
 }
 
 .navbarLogo {
-    color: #333;
+    color: #6366f1;
     font-size: 1.5rem;
     font-weight: 700;
     text-decoration: none;
     display: flex;
     align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.navbarLogo:hover {
+    transform: scale(1.05);
 }
 
 .siteName {
@@ -34,6 +45,7 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    position: relative;
 }
 
 .letterB {
@@ -46,6 +58,13 @@
 
 .letterD {
     color: #8b5cf6;
+}
+
+.domain {
+    color: #f97316;
+    font-weight: 600;
+    margin-left: 4px;
+    position: relative;
 }
 
 .navMenu {
@@ -65,17 +84,88 @@
 }
 
 .navLink {
-    color: #333;
+    color: #555;
     text-decoration: none;
     font-weight: 500;
     padding: 8px 16px;
     transition: all 0.3s ease;
     border-radius: 8px;
+    position: relative;
 }
 
 .navLink:hover {
-    background-color: rgba(75, 108, 183, 0.1);
-    color: #4b6cb7;
+    transform: translateY(-2px);
+}
+
+/* Dashboard link - Blue */
+.dashboardLink {
+    color: #3b82f6;
+}
+
+.dashboardLink:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+
+.dashboardLink.activeLink::after {
+    background: #3b82f6;
+}
+
+/* Upload link - Pink */
+.uploadLink {
+    color: #ec4899;
+}
+
+.uploadLink:hover {
+    background-color: rgba(236, 72, 153, 0.1);
+    color: #ec4899;
+}
+
+.uploadLink.activeLink::after {
+    background: #ec4899;
+}
+
+/* History link - Purple */
+.historyLink {
+    color: #8b5cf6;
+}
+
+.historyLink:hover {
+    background-color: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
+}
+
+.historyLink.activeLink::after {
+    background: #8b5cf6;
+}
+
+/* Credits link - Orange */
+.creditsLink {
+    color: #f97316;
+}
+
+.creditsLink:hover {
+    background-color: rgba(249, 115, 22, 0.1);
+    color: #f97316;
+}
+
+.creditsLink.activeLink::after {
+    background: #f97316;
+}
+
+.activeLink {
+    font-weight: 600;
+}
+
+.activeLink::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 3px;
+    border-radius: 3px;
 }
 
 .navLinkButton {
@@ -90,24 +180,44 @@
 }
 
 .navLinkButton:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
     transform: translateY(-2px);
 }
 
 .credits {
-    background: linear-gradient(to right, #4b6cb7, #8b5cf6);
-    padding: 6px 12px;
+    background: linear-gradient(to right, #3b82f6, #8b5cf6);
+    padding: 8px 14px;
     border-radius: 20px;
     color: white;
     font-weight: 500;
     font-size: 0.9rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(59, 130, 246, 0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.credits:hover {
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+    transform: translateY(-2px);
+}
+
+.credits::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #38bdf8;
+    border-radius: 50%;
+    margin-right: 6px;
+    animation: pulse 2s infinite;
 }
 
 .logoutButton {
     background-color: transparent;
-    border: 1px solid #ff6b6b;
-    color: #ff6b6b;
+    border: 2px solid #ec4899;
+    color: #ec4899;
     padding: 8px 16px;
     font-size: 0.9rem;
     font-weight: 500;
@@ -117,8 +227,19 @@
 }
 
 .logoutButton:hover {
-    background-color: #ff6b6b;
-    color: white;
+    background-color: rgba(236, 72, 153, 0.1);
+    color: #ec4899;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(236, 72, 153, 0.2);
+}
+
+.menuIcon {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 20px;
+    cursor: pointer;
 }
 
 .menuIcon {
@@ -133,15 +254,40 @@
 .menuBar {
     width: 100%;
     height: 3px;
-    background-color: #333;
     border-radius: 2px;
     transition: all 0.3s ease;
 }
 
-.domain {
-    color: #f97316;
-    font-weight: 600;
-    margin-left: 4px;
+.menuBar:nth-child(1) {
+    background-color: #3b82f6;
+    /* Blue */
+}
+
+.menuBar:nth-child(2) {
+    background-color: #ec4899;
+    /* Pink */
+}
+
+.menuBar:nth-child(3) {
+    background-color: #8b5cf6;
+    /* Purple */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: scale(0.95);
+        opacity: 0.7;
+    }
 }
 
 @media screen and (max-width: 960px) {
@@ -159,7 +305,7 @@
         opacity: 0;
         transition: all 0.5s ease;
         background-color: white;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
         padding: 20px 0;
         z-index: 1;
     }
@@ -191,6 +337,7 @@
 
     .menuBar.open:nth-child(1) {
         transform: rotate(-45deg) translate(-5px, 6px);
+        background-color: #ec4899;
     }
 
     .menuBar.open:nth-child(2) {
@@ -199,5 +346,6 @@
 
     .menuBar.open:nth-child(3) {
         transform: rotate(45deg) translate(-5px, -6px);
+        background-color: #3b82f6;
     }
 }

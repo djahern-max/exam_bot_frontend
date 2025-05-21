@@ -49,9 +49,15 @@
     color: #8b5cf6;
 }
 
+.domain {
+    color: #f97316;
+    /* Added orange color for .com */
+}
+
 .title {
     font-size: 1.5rem;
-    color: #333;
+    color: #f97316;
+    /* Changed from #333 to orange */
     margin-bottom: 24px;
     text-align: center;
 }
@@ -68,7 +74,8 @@
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
-    color: #333;
+    color: #f97316;
+    /* Changed from #333 to orange */
 }
 
 .input {
@@ -82,8 +89,10 @@
 
 .input:focus {
     outline: none;
-    border-color: #4b6cb7;
-    box-shadow: 0 0 0 2px rgba(75, 108, 183, 0.2);
+    border-color: #f97316;
+    /* Changed from #4b6cb7 to orange */
+    box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
+    /* Changed from rgba(75, 108, 183, 0.2) to orange with opacity */
 }
 
 .submitButton {
@@ -115,11 +124,13 @@
 .loginText {
     text-align: center;
     margin-top: 20px;
-    color: #666;
+    color: #f97316;
+    /* Changed from #666 to orange */
 }
 
 .loginLink {
-    color: #4b6cb7;
+    color: #f97316;
+    /* Changed from #4b6cb7 to orange */
     font-weight: 600;
     text-decoration: none;
 }

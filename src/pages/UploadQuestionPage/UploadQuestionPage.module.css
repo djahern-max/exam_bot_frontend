@@ -1,0 +1,260 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.creditsInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: #f7fafc;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.creditCount {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #4a5568;
+}
+
+.buyCreditsButton {
+    background-color: #4299e1;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.buyCreditsButton:hover {
+    background-color: #3182ce;
+}
+
+.errorMessage {
+    background-color: #fed7d7;
+    border-left: 4px solid #f56565;
+    color: #c53030;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.25rem;
+}
+
+.successMessage {
+    background-color: #c6f6d5;
+    border-left: 4px solid #48bb78;
+    color: #2f855a;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.25rem;
+}
+
+.uploadForm {
+    margin-bottom: 2rem;
+}
+
+.dropzone {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    border: 2px dashed #cbd5e0;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7fafc;
+    transition: all 0.2s;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.dropzone.active {
+    border-color: #4299e1;
+    background-color: #ebf8ff;
+}
+
+.dropzone.hasPreview {
+    border-style: solid;
+    height: auto;
+}
+
+.fileInput {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.uploadPrompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.uploadIcon {
+    color: #a0aec0;
+    margin-bottom: 1rem;
+}
+
+.uploadText {
+    font-size: 1rem;
+    color: #4a5568;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.browseButton,
+.cameraButton {
+    background-color: #edf2f7;
+    color: #4a5568;
+    border: 1px solid #cbd5e0;
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 0.5rem;
+}
+
+.browseButton:hover,
+.cameraButton:hover {
+    background-color: #e2e8f0;
+}
+
+.previewContainer {
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imagePreview {
+    max-width: 100%;
+    max-height: 400px;
+    border-radius: 0.375rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+.removeButton {
+    background-color: #f56565;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.removeButton:hover {
+    background-color: #e53e3e;
+}
+
+.helpText {
+    font-size: 0.875rem;
+    color: #718096;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.submitButton {
+    width: 100%;
+    background-color: #48bb78;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submitButton:hover:not(:disabled) {
+    background-color: #38a169;
+}
+
+.submitButton:disabled {
+    background-color: #a0aec0;
+    cursor: not-allowed;
+}
+
+.examples {
+    background-color: #f7fafc;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.examples h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 1rem;
+}
+
+.examples ul {
+    padding-left: 1.5rem;
+}
+
+.examples li {
+    margin-bottom: 0.5rem;
+    color: #4a5568;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 640px) {
+    .container {
+        padding: 1rem 0.5rem;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .creditCount {
+        font-size: 1rem;
+    }
+
+    .dropzone {
+        height: 250px;
+    }
+
+    .uploadIcon svg {
+        width: 48px;
+        height: 48px;
+    }
+
+    .uploadText {
+        font-size: 0.875rem;
+    }
+
+    .browseButton,
+    .cameraButton {
+        font-size: 0.75rem;
+        padding: 0.375rem 0.75rem;
+    }
+}

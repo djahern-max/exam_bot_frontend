@@ -1,12 +1,34 @@
-import React, { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
     const [menuOpen, setMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 20) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    // Close menu when route changes
+    useEffect(() => {
+        setMenuOpen(false);
+    }, [location.pathname]);
 
     const handleLogout = () => {
         logout();
@@ -18,7 +40,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className={styles.navbar}>
+        <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
             <div className={styles.navbarContainer}>
                 <Link to="/" className={styles.navbarLogo}>
                     <span className={styles.siteName}>
@@ -42,22 +64,34 @@ const Navbar = () => {
                                 </span>
                             </li>
                             <li className={styles.navItem}>
-                                <Link to="/dashboard" className={styles.navLink}>
+                                <Link
+                                    to="/dashboard"
+                                    className={`${styles.navLink} ${styles.dashboardLink} ${location.pathname === '/dashboard' ? styles.activeLink : ''}`}
+                                >
                                     Dashboard
                                 </Link>
                             </li>
                             <li className={styles.navItem}>
-                                <Link to="/upload" className={styles.navLink}>
+                                <Link
+                                    to="/upload"
+                                    className={`${styles.navLink} ${styles.uploadLink} ${location.pathname === '/upload' ? styles.activeLink : ''}`}
+                                >
                                     Upload Question
                                 </Link>
                             </li>
                             <li className={styles.navItem}>
-                                <Link to="/history" className={styles.navLink}>
+                                <Link
+                                    to="/history"
+                                    className={`${styles.navLink} ${styles.historyLink} ${location.pathname === '/history' ? styles.activeLink : ''}`}
+                                >
                                     History
                                 </Link>
                             </li>
                             <li className={styles.navItem}>
-                                <Link to="/credits" className={styles.navLink}>
+                                <Link
+                                    to="/credits"
+                                    className={`${styles.navLink} ${styles.creditsLink} ${location.pathname === '/credits' ? styles.activeLink : ''}`}
+                                >
                                     Buy Credits
                                 </Link>
                             </li>
@@ -73,7 +107,10 @@ const Navbar = () => {
                     ) : (
                         <>
                             <li className={styles.navItem}>
-                                <Link to="/login" className={styles.navLink}>
+                                <Link
+                                    to="/login"
+                                    className={`${styles.navLink} ${location.pathname === '/login' ? styles.activeLink : ''}`}
+                                >
                                     Login
                                 </Link>
                             </li>

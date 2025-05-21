@@ -10,17 +10,18 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 // Import pages
 import LoginPage from './pages/LoginPage/LoginPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
+import UploadQuestionPage from './pages/UploadQuestionPage/UploadQuestionPage';
+import QuestionHistoryPage from './pages/QuestionHistoryPage/QuestionHistoryPage';
+import QuestionDetailPage from './pages/QuestionHistoryPage/QuestionDetailPage';
+import DashboardPage from './pages/DashboardPage/DashboardPage';
+import CreditsPage from './pages/CreditsPage/CreditsPage';
 
 // Import context
 import { AuthProvider } from './context/AuthContext';
 
 // Basic placeholder components for pages we haven't fully implemented yet
-// Basic placeholder components for pages we haven't fully implemented yet
 const HomePage = () => <div style={{ padding: '20px' }}><h1>ABACADABA.com - Home Page</h1></div>;
-const DashboardPage = () => <div style={{ padding: '20px' }}><h1>ABACADABA.com - Dashboard Page</h1></div>;
-const QuestionHistoryPage = () => <div style={{ padding: '20px' }}><h1>ABACADABA.com - History Page</h1></div>;
-const UploadQuestionPage = () => <div style={{ padding: '20px' }}><h1>ABACADABA.com - Upload Question Page</h1></div>;
-const CreditsPage = () => <div style={{ padding: '20px' }}><h1>ABACADABA.com - Credits Page</h1></div>;
+
 
 function App() {
     return (
@@ -54,6 +55,22 @@ function App() {
                                 element={
                                     <PrivateRoute>
                                         <QuestionHistoryPage />
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route
+                                path="/questions/:id"
+                                element={
+                                    <PrivateRoute>
+                                        <QuestionDetailPage />
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route
+                                path="/credits"
+                                element={
+                                    <PrivateRoute>
+                                        <CreditsPage />
                                     </PrivateRoute>
                                 }
                             />

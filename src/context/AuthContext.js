@@ -11,12 +11,11 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [token, setToken] = useState(localStorage.getItem('token') || null);
 
-    // Check if user is logged in on mount
+    // Check if user is logged in on mount or when token changes
     useEffect(() => {
         const checkAuth = async () => {
-            const token = localStorage.getItem('token');
-
             if (token) {
                 try {
                     // Set axios auth header
@@ -30,15 +29,19 @@ export const AuthProvider = ({ children }) => {
                     // If token is invalid, remove it
                     localStorage.removeItem('token');
                     delete axios.defaults.headers.common['Authorization'];
+                    setToken(null);
                     setError('Session expired. Please log in again.');
                 }
+            } else {
+                // No token means not logged in
+                setUser(null);
             }
 
             setLoading(false);
         };
 
         checkAuth();
-    }, []);
+    }, [token]);
 
     // Login function
     const login = async (email, password) => {
@@ -55,8 +58,9 @@ export const AuthProvider = ({ children }) => {
 
             const { access_token } = response.data;
 
-            // Save token to localStorage
+            // Save token to localStorage and state
             localStorage.setItem('token', access_token);
+            setToken(access_token);
 
             // Set axios auth header
             axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
@@ -77,13 +81,14 @@ export const AuthProvider = ({ children }) => {
     };
 
     // Register function
-    const register = async (email, password) => {
+    const register = async (email, password, fullName) => {
         try {
             console.log("Registering user:", email);
 
             const response = await axios.post('/api/auth/register', {
                 email,
-                password
+                password,
+                full_name: fullName
             });
 
             console.log("Registration response:", response.data);
@@ -109,17 +114,51 @@ export const AuthProvider = ({ children }) => {
 
         // Clear user state
         setUser(null);
+        setToken(null);
+    };
+
+    // Function to update user credits
+    const updateCredits = (newCredits) => {
+        if (user) {
+            setUser({
+                ...user,
+                credits: newCredits
+            });
+        }
+    };
+
+    // Function to refresh user data
+    const refreshUserData = async () => {
+        if (token) {
+            try {
+                const response = await axios.get('/api/auth/me');
+                setUser(response.data);
+                return response.data;
+            } catch (err) {
+                console.error("Error refreshing user data:", err);
+                if (err.response?.status === 401) {
+                    // If unauthorized, log out
+                    logout();
+                }
+                return null;
+            }
+        }
+        return null;
     };
 
     return (
         <AuthContext.Provider
             value={{
                 user,
+                token,
                 loading,
                 error,
                 login,
                 register,
-                logout
+                logout,
+                updateCredits,
+                refreshUserData,
+                isAuthenticated: !!token
             }}
         >
             {children}
